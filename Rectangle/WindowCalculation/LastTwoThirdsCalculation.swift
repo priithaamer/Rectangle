@@ -20,8 +20,10 @@ class LastTwoThirdsCalculation: WindowCalculation {
     private func rightTwoThirds(_ visibleFrameOfScreen: CGRect) -> CGRect {
         
         var twoThirdsRect = visibleFrameOfScreen
-        twoThirdsRect.size.width = floor(visibleFrameOfScreen.width * 2 / 3.0)
-        twoThirdsRect.origin.x = visibleFrameOfScreen.minX + visibleFrameOfScreen.width - twoThirdsRect.width
+        twoThirdsRect.size.width = floor(visibleFrameOfScreen.width * 2 / 3.0) - 15
+        twoThirdsRect.size.height = visibleFrameOfScreen.height - 30
+        twoThirdsRect.origin.x = visibleFrameOfScreen.minX + visibleFrameOfScreen.width - twoThirdsRect.width - 15
+        twoThirdsRect.origin.y = visibleFrameOfScreen.minY + 15
         return twoThirdsRect
     }
     

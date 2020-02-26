@@ -126,7 +126,11 @@ class WindowCalculationFactory {
         case .lastTwoThirds: return lastTwoThirdsCalculation
         case .lastThird: return lastThirdCalculation
         case .moveLeft: return moveLeftRightCalculation
+        case .moveLeftUp: return moveLeftRightCalculation
+        case .moveLeftDown: return moveLeftRightCalculation
         case .moveRight: return moveLeftRightCalculation
+        case .moveRightUp: return moveLeftRightCalculation
+        case .moveRightDown: return moveLeftRightCalculation
         case .moveUp: return moveUpCalculation
         case .moveDown: return moveDownCalculation
         case .almostMaximize: return almostMaximizeCalculation

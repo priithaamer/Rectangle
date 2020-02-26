@@ -20,6 +20,9 @@ class FirstTwoThirdsCalculation: WindowCalculation {
     private func leftTwoThirds(_ visibleFrameOfScreen: CGRect) -> CGRect {
         var twoThirdsRect = visibleFrameOfScreen
         twoThirdsRect.size.width = floor(visibleFrameOfScreen.width * 2 / 3.0)
+        twoThirdsRect.size.height = visibleFrameOfScreen.height - 30
+        twoThirdsRect.origin.x = 15
+        twoThirdsRect.origin.y = visibleFrameOfScreen.minY + 15
         return twoThirdsRect
     }
     

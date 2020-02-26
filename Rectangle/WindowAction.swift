@@ -37,11 +37,15 @@ enum WindowAction: Int {
     centerThird = 22,
     lastTwoThirds = 23,
     lastThird = 24,
-    moveLeft = 25,
-    moveRight = 26,
-    moveUp = 27,
-    moveDown = 28,
-    almostMaximize = 29
+    moveLeft = 26,
+    moveLeftUp = 27,
+    moveLeftDown = 28,
+    moveRight = 29,
+    moveRightUp = 30,
+    moveRightDown = 31,
+    moveUp = 32,
+    moveDown = 33,
+    almostMaximize = 34
     
     // Order matters here - it's used in the menu
     static let active = [leftHalf, rightHalf, topHalf, bottomHalf,
@@ -49,7 +53,7 @@ enum WindowAction: Int {
                          firstThird, firstTwoThirds, centerThird, lastTwoThirds, lastThird,
                          maximize, almostMaximize, maximizeHeight, smaller, larger, center, restore,
                          nextDisplay, previousDisplay,
-                         moveLeft, moveRight, moveUp, moveDown]
+                         moveLeft, moveLeftUp, moveLeftDown, moveRight, moveRightUp, moveRightDown, moveUp, moveDown]
     
     func post() {
         NotificationCenter.default.post(name: notificationName, object: ExecutionParameters(self))
@@ -93,7 +97,11 @@ enum WindowAction: Int {
         case .lastTwoThirds: return "lastTwoThirds"
         case .lastThird: return "lastThird"
         case .moveLeft: return "moveLeft"
+        case .moveLeftUp: return "moveLeftUp"
+        case .moveLeftDown: return "moveLeftDown"
         case .moveRight: return "moveRight"
+        case .moveRightUp: return "moveRightUp"
+        case .moveRightDown: return "moveRightDown"
         case .moveUp: return "moveUp"
         case .moveDown: return "moveDown"
         case .almostMaximize: return "almostMaximize"
@@ -171,9 +179,21 @@ enum WindowAction: Int {
         case .moveLeft:
             key = "v2f-bX-xiM.title"
             value = "Move Left"
+        case .moveLeftUp:
+            key = "111-11-111.title"
+            value = "Move Left-Up"
+        case .moveLeftDown:
+            key = "111-11-112.title"
+            value = "Move Left-Down"
         case .moveRight:
             key = "rzr-Qq-702.title"
             value = "Move Right"
+        case .moveRightUp:
+            key = "111-11-113.title"
+            value = "Move Right-Up"
+        case .moveRightDown:
+            key = "111-11-114.title"
+            value = "Move Right-Down"
         case .moveUp:
             key = "HOm-BV-2jc.title"
             value = "Move Up"
@@ -223,6 +243,12 @@ enum WindowAction: Int {
         case .bottomRight: return Shortcut( cmd|ctrl|shift, kVK_RightArrow )
         case .topLeft: return Shortcut( ctrl|cmd, kVK_LeftArrow )
         case .topRight: return Shortcut( ctrl|cmd, kVK_RightArrow )
+        case .moveUp: return Shortcut( ctrl|cmd, kVK_ANSI_I )
+        case .moveLeftUp: return Shortcut( ctrl|cmd, kVK_ANSI_U )
+        case .moveLeftDown: return Shortcut( ctrl|cmd, kVK_ANSI_J )
+        case .moveRightUp: return Shortcut( ctrl|cmd, kVK_ANSI_O )
+        case .moveRightDown: return Shortcut( ctrl|cmd, kVK_ANSI_L )
+        case .moveDown: return Shortcut( ctrl|cmd, kVK_ANSI_K )
         case .restore: return Shortcut( ctrl|alt, kVK_Delete)
         default: return nil
         }
@@ -279,7 +305,11 @@ enum WindowAction: Int {
         case .lastTwoThirds: return NSImage(imageLiteralResourceName: "lastTwoThirdsTemplate")
         case .lastThird: return NSImage(imageLiteralResourceName: "lastThirdTemplate")
         case .moveLeft: return NSImage(imageLiteralResourceName: "moveLeftTemplate")
+        case .moveLeftUp: return NSImage(imageLiteralResourceName: "moveLeftTemplate")
+        case .moveLeftDown: return NSImage(imageLiteralResourceName: "moveLeftTemplate")
         case .moveRight: return NSImage(imageLiteralResourceName: "moveRightTemplate")
+        case .moveRightUp: return NSImage(imageLiteralResourceName: "moveRightTemplate")
+        case .moveRightDown: return NSImage(imageLiteralResourceName: "moveRightTemplate")
         case .moveUp: return NSImage(imageLiteralResourceName: "moveUpTemplate")
         case .moveDown: return NSImage(imageLiteralResourceName: "moveDownTemplate")
         case .almostMaximize: return NSImage(imageLiteralResourceName: "almostMaximizeTemplate")

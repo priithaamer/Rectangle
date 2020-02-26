@@ -13,8 +13,8 @@ class MoveUpCalculation: WindowCalculation {
     override func calculateRect(_ window: Window, lastAction: RectangleAction?, visibleFrameOfScreen: CGRect, action: WindowAction) -> RectResult {
         
         var calculatedWindowRect = window.rect
-        calculatedWindowRect.origin.y = visibleFrameOfScreen.maxY - window.rect.height
-        
+        calculatedWindowRect.origin.y = visibleFrameOfScreen.maxY - window.rect.height - 15
+
         if window.rect.width >= visibleFrameOfScreen.width {
             calculatedWindowRect.size.width = visibleFrameOfScreen.width
             calculatedWindowRect.origin.x = visibleFrameOfScreen.minX

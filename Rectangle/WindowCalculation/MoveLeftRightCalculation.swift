@@ -16,6 +16,16 @@ class MoveLeftRightCalculation: WindowCalculation {
             return calculateLeft(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
         } else if action == .moveRight {
             return calculateRight(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
+        } else if action == .moveLeftUp {
+            return calculateLeftUp(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
+        } else if action == .moveLeftDown {
+            return calculateLeftDown(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
+        } else if action == .moveRight {
+            return calculateRight(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
+        } else if action == .moveRightUp {
+            return calculateRightUp(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
+        } else if action == .moveRightDown {
+            return calculateRightDown(window, lastAction: lastAction, screen: usableScreens.currentScreen, usableScreens: usableScreens)
         }
         
         return nil
@@ -38,7 +48,7 @@ class MoveLeftRightCalculation: WindowCalculation {
         let visibleFrameOfScreen = screen.visibleFrame
         
         var calculatedWindowRect = window.rect
-        calculatedWindowRect.origin.x = visibleFrameOfScreen.minX
+        calculatedWindowRect.origin.x = visibleFrameOfScreen.minX + 15
         
         if window.rect.height >= visibleFrameOfScreen.height {
             calculatedWindowRect.size.height = visibleFrameOfScreen.height
@@ -46,6 +56,28 @@ class MoveLeftRightCalculation: WindowCalculation {
         } else if Defaults.centeredDirectionalMove.enabled != false {
             calculatedWindowRect.origin.y = round((visibleFrameOfScreen.height - window.rect.height) / 2.0) + visibleFrameOfScreen.minY
         }
+        return WindowCalculationResult(rect: calculatedWindowRect, screen: screen, resultingAction: .moveLeft)
+        
+    }
+    
+    func calculateLeftUp(_ window: Window, lastAction: RectangleAction?, screen: NSScreen, usableScreens: UsableScreens) -> WindowCalculationResult? {
+        let visibleFrameOfScreen = screen.visibleFrame
+        
+        var calculatedWindowRect = window.rect
+        calculatedWindowRect.origin.x = visibleFrameOfScreen.minX + 15
+        calculatedWindowRect.origin.y = visibleFrameOfScreen.maxY - window.rect.height - 15
+        
+        return WindowCalculationResult(rect: calculatedWindowRect, screen: screen, resultingAction: .moveLeft)
+        
+    }
+    
+    func calculateLeftDown(_ window: Window, lastAction: RectangleAction?, screen: NSScreen, usableScreens: UsableScreens) -> WindowCalculationResult? {
+        let visibleFrameOfScreen = screen.visibleFrame
+        
+        var calculatedWindowRect = window.rect
+        calculatedWindowRect.origin.x = visibleFrameOfScreen.minX + 15
+        calculatedWindowRect.origin.y = visibleFrameOfScreen.minY + 15
+        
         return WindowCalculationResult(rect: calculatedWindowRect, screen: screen, resultingAction: .moveLeft)
         
     }
@@ -68,7 +100,7 @@ class MoveLeftRightCalculation: WindowCalculation {
         let visibleFrameOfScreen = screen.visibleFrame
         
         var calculatedWindowRect = window.rect
-        calculatedWindowRect.origin.x = visibleFrameOfScreen.maxX - window.rect.width
+        calculatedWindowRect.origin.x = visibleFrameOfScreen.maxX - window.rect.width - 15
         
         if window.rect.height >= visibleFrameOfScreen.height {
             calculatedWindowRect.size.height = visibleFrameOfScreen.height
@@ -78,6 +110,27 @@ class MoveLeftRightCalculation: WindowCalculation {
         }
         return WindowCalculationResult(rect: calculatedWindowRect, screen: screen, resultingAction: .moveRight)
 
+    }
+    
+    func calculateRightUp(_ window: Window, lastAction: RectangleAction?, screen: NSScreen, usableScreens: UsableScreens) -> WindowCalculationResult? {
+        let visibleFrameOfScreen = screen.visibleFrame
+        
+        var calculatedWindowRect = window.rect
+        calculatedWindowRect.origin.x = visibleFrameOfScreen.maxX - window.rect.width - 15
+        calculatedWindowRect.origin.y = visibleFrameOfScreen.maxY - window.rect.height - 15
+        
+        return WindowCalculationResult(rect: calculatedWindowRect, screen: screen, resultingAction: .moveLeft)
+
+    }
+    
+    func calculateRightDown(_ window: Window, lastAction: RectangleAction?, screen: NSScreen, usableScreens: UsableScreens) -> WindowCalculationResult? {
+        let visibleFrameOfScreen = screen.visibleFrame
+        
+        var calculatedWindowRect = window.rect
+        calculatedWindowRect.origin.x = visibleFrameOfScreen.maxX - window.rect.width - 15
+        calculatedWindowRect.origin.y = visibleFrameOfScreen.minY + 15
+        
+        return WindowCalculationResult(rect: calculatedWindowRect, screen: screen, resultingAction: .moveLeft)
     }
     
     // unused
